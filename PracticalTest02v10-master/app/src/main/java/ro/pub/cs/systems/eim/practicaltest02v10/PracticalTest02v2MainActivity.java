@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PracticalTest02v2MainActivity extends AppCompatActivity {
-    // PAS 2: Initializare serverThread, toate EditText-urile, Spinner-ul si TextView-ul
 
     private ServerThread serverThread = null;
     private ClientThread clientThread = null;
@@ -21,13 +20,10 @@ public class PracticalTest02v2MainActivity extends AppCompatActivity {
     private EditText nameEditText = null;
     private TextView weatherForecastTextView = null;
 
-
-    // PAS 3: Initializare listeneri pentru butoane
     private final ConnectButtonClickListener connectButtonClickListener = new ConnectButtonClickListener();
 
     private final GetWeatherForecastButtonClickListener getWeatherForecastButtonClickListener = new GetWeatherForecastButtonClickListener();
 
-    // PAS 4: Creare conexiune server
     private class ConnectButtonClickListener implements Button.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -45,7 +41,6 @@ public class PracticalTest02v2MainActivity extends AppCompatActivity {
         }
     }
 
-    // PAS 5: Creare conexiune client
     private class GetWeatherForecastButtonClickListener implements Button.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -61,7 +56,7 @@ public class PracticalTest02v2MainActivity extends AppCompatActivity {
             }
             String city = nameEditText.getText().toString();
             if (city == null || city.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client (city) should be filled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client (operation) should be filled", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -79,12 +74,10 @@ public class PracticalTest02v2MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // PAS 2.1: Creare elemente vizuale
         serverPortEditText = (EditText)findViewById(R.id.server_port_edit_text);
         clientAddressEditText = (EditText)findViewById(R.id.client_address_edit_text);
         clientPortEditText = (EditText)findViewById(R.id.client_port_edit_text);
         nameEditText = (EditText)findViewById(R.id.client_input_edit_text);
-//        informationTypeSpinner = (Spinner)findViewById(R.id.information_type_spinner);
         Button getWeatherForecastButton = (Button) findViewById(R.id.get_info_button);
         getWeatherForecastButton.setOnClickListener(getWeatherForecastButtonClickListener);
 
@@ -93,8 +86,6 @@ public class PracticalTest02v2MainActivity extends AppCompatActivity {
 
         weatherForecastTextView = (TextView)findViewById(R.id.result_text_view);
     }
-
-    // PAS 6: Oprire serverThread
     @Override
     protected void onDestroy() {
         Log.i(Constants.TAG, "[MAIN ACTIVITY] onDestroy() callback method has been invoked");
